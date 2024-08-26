@@ -20,18 +20,18 @@ This experience typically includes the following features:
    Data Inference flow:
 ![Data Inference flow](img/DataInference.jpeg)
 
-   * Users submits query through chatbot prompt, python microservices receives request on HTTP and generate an event to Confluent topic.
-   * Python-Kafka consumer receives chatbot request, query vector store (MongoDB) using vector search and pass the information to OpenAI to get an answer
-   * In the given answer, if there are any reference transactions mentioned. Confluent Flink enrich the answer using real time data from other private data sources.
-   * Once the answer is fully enriched, A Python-Kafka consumer receives the final response from topic and sends to chatbot using websocet
-   * The final response is sinked to a data store to enable for analytical and auditing use cases
+   * Users submits query through chatbot prompt, python microservice receives request on HTTP and generate an event to Confluent topic.
+   * Python-Kafka consumer receives chatbot request, query vector store (MongoDB) using vector search and pass the information to OpenAI to get an answer.
+   * In the given answer, if there are any reference transactions mentioned, Confluent Flink enrich the answer using real time data from other private data sources.
+   * Once the answer is fully enriched, A Python-Kafka consumer receives the final response from topic and sends to chatbot using websocket.
+   * The final response is sinked to a data store to enable for analytical and auditing use cases.
    * If the user question is already answered, workflow query the datastore and respond back to the chatbot.
 
 3. **Contextual Understanding**: The chatbot can understand the context of questions in relation to the document's content, making the interaction more meaningful and accurate. It can pull information, generate summaries, and provide insights based on the document's data.
 
 ## Demo-Video
 
-## How to run this Demo:
+## Demo Setup:
 
 ### Prerequisites
 
