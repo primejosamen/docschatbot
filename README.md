@@ -117,6 +117,41 @@ You need a working account for Confluent Cloud. Sign-up with Confluent Cloud is 
    ```
 
    > **Note:** if you don't source `.env` file you'll be prompted to manually provide the values through command line when running Terraform commands.
+## Build your cloud infrastructure
+1. Navigate to the repo's terraform directory.
+```
+cd terraform
+```
+2. Initialize Terraform within the directory.
+```
+terraform init
+```
+3. Create the Terraform plan.
+```
+terraform plan
+```
+4. Apply the plan to create the infrastructure.
+```
+terraform apply
+```
+5. Write the output of terraform to a JSON file. The setup.sh script will parse the JSON file to update the .env file.
+```
+terraform output -json > ../resources.json
+```
+6. Run the setup.sh script.
+```
+cd jobportal-genai
+./setup.sh
+```
+This script achieves the following:
+
+* Creates an API key pair that will be used in connectors' configuration files for authentication purposes.
+* Creates an API key pair for Schema Registry
+* Creates Tags and business metadata
+* Updates the .env file to replace the remaining variables with the newly generated values.
+Source .env file
+```
+source .env file.
 
 ## Tools
 * install git to clone the source
