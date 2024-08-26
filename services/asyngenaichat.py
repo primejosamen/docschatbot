@@ -38,8 +38,6 @@ from langchain.vectorstores import MongoDBAtlasVectorSearch
 from langchain.chains import RetrievalQA
 from langchain.chat_models import ChatOpenAI
 OPENAIKEY = os.environ["OPENAI_API_KEY"]
-PROXYCURL_API_KEY = os.environ["PROXYCURL_API_KEY"]
-SERPAPI_API_KEY = os.environ["SERPAPI_API_KEY"]
 # mongo connection
 MONGO_URI = os.environ["MONGO_URI"]
 client = pymongo.MongoClient(MONGO_URI)
@@ -66,7 +64,7 @@ memory = ConversationBufferMemory(
             )
 # initialize socketio client
 # sio = socketio.Client(logger=True, engineio_logger=True)
-# sio.connect('http://ec2-3-87-26-1.compute-1.amazonaws.com:5001')
+# sio.connect('http://localhost:5001')
 args = ccloud_lib.parse_args()
 config_file = args.config_file
 chatbotreqtopic = args.chatbotreqtopic
