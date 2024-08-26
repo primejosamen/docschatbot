@@ -2,12 +2,18 @@
 
 A web portal that enables a GenAI chatbot experience on PDF documents allows users to interact with their documents through a generative AI-powered chatbot. This experience typically includes the following features:
 
-1. **Data augmentation**: Users can upload financial and account summary documents in PDF format. The platform processes these documents by dividing them into pages and publishing each page's content, along with relevant metadata, to a Confluent Kafka topic. A fully managed Confluent Flink service is then used to create vector representations of the document data for more efficient AI interactions and queries.
+1. **Data augmentation**:
+   
+   a. Users can upload financial and account summary documents in PDF format. 
+   b. The platform processes these documents by dividing them into pages and publishing each page's content, along with relevant metadata, to a Confluent Kafka topic.
+   c. A fully managed Confluent Flink service is then used to create vector representations of the document data for more efficient AI interactions and queries.
 
    Data Augmentation flow:
 ![Data Augmentation flow](img/DataAugmentation.jpeg)
 
-2. **AI-Powered Interaction**: The portal is integrated with a generative AI model (like GPT) that can read, understand, and interact with the content of the documents. Users can ask the chatbot questions related to the document, request summaries, seek clarifications, or ask for specific sections or details. The AI can generate responses based on the content of the documents.
+
+
+3. **AI-Powered Interaction**: The portal is integrated with a generative AI model (like GPT) that can read, understand, and interact with the content of the documents. Users can ask the chatbot questions related to the document, request summaries, seek clarifications, or ask for specific sections or details. The AI can generate responses based on the content of the documents.
    
    Data Inference flow:
 ![Data Inference flow](img/DataInference.jpeg)
@@ -18,13 +24,6 @@ A web portal that enables a GenAI chatbot experience on PDF documents allows use
 This kind of portal is particularly useful in scenarios like legal document review, academic research, business reporting, and any other context where interacting with large volumes of text-based information is required.
 
 
-
-Use Case Diagrams:
-  Jobseeker flow:
-![Jobseeker flow](img/Jobseeker.jpeg)
-
-  Recruiter flow:
-![Recruiter flow](img/Recruiter.jpeg)
 
 # Prerequisites
 
