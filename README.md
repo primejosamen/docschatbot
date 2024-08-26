@@ -138,21 +138,6 @@ terraform apply
 ```
 terraform output -json > ../resources.json
 ```
-6. Run the setup.sh script.
-```
-cd jobportal-genai
-./setup.sh
-```
-1. This script achieves the following:
-
-* Creates an API key pair that will be used in connectors' configuration files for authentication purposes.
-* Creates an API key pair for Schema Registry
-* Creates Tags and business metadata
-* Updates the .env file to replace the remaining variables with the newly generated values.
-2. Source .env file
-```
-source .env
-```
 ## Run python services
 Navigate to services directory and excute the remaining steps in this section
 
