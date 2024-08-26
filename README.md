@@ -7,9 +7,13 @@ A web portal that enables a GenAI chatbot experience on PDF documents allows use
    Data Augmentation flow:
 ![Data Augmentation flow](img/DataAugmentation.jpeg)
 
-3. **AI-Powered Interaction**: The portal is integrated with a generative AI model (like GPT) that can read, understand, and interact with the content of the documents. Users can ask the chatbot questions related to the document, request summaries, seek clarifications, or ask for specific sections or details. The AI can generate responses based on the content of the documents.
+2. **AI-Powered Interaction**: The portal is integrated with a generative AI model (like GPT) that can read, understand, and interact with the content of the documents. Users can ask the chatbot questions related to the document, request summaries, seek clarifications, or ask for specific sections or details. The AI can generate responses based on the content of the documents.
+   
+   Data Inference flow:
+![Data Inference flow](img/DataInference.jpeg)
+   
 
-4. **Contextual Understanding**: The chatbot can understand the context of questions in relation to the document's content, making the interaction more meaningful and accurate. It can pull information, generate summaries, and provide insights based on the document's data.
+5. **Contextual Understanding**: The chatbot can understand the context of questions in relation to the document's content, making the interaction more meaningful and accurate. It can pull information, generate summaries, and provide insights based on the document's data.
 
 This kind of portal is particularly useful in scenarios like legal document review, academic research, business reporting, and any other context where interacting with large volumes of text-based information is required.
 
