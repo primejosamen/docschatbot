@@ -158,6 +158,7 @@ source .env file.
 Install python modules
 
 ```
+
 pip install PyPDF2
 pip install gcc
 pip install confluent-kafka
@@ -172,5 +173,6 @@ pip install flask_socketio
 pip install flask_cors
 pip install avro-python3
 pip install jproperties
+
 ```
 
