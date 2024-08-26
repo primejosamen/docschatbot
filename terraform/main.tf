@@ -208,16 +208,16 @@ resource "confluent_api_key" "genaidemo-manager-flink-api-key" {
   ]
 }
 # register schemas
-# jobseekerv1 schema
-resource "confluent_schema" "jobseekerv1" {
+# source_docs_v1.avsc
+resource "confluent_schema" "source_docs_v1" {
   schema_registry_cluster {
     id = data.confluent_schema_registry_cluster.advanced.id
   }
   rest_endpoint = data.confluent_schema_registry_cluster.advanced.rest_endpoint
   # https://developer.confluent.io/learn-kafka/schema-registry/schema-subjects/#topicnamestrategy
-  subject_name = "${confluent_kafka_topic.jobseekerv1.topic_name}-value"
+  subject_name = "${confluent_kafka_topic.source_docs_v1.topic_name}-value"
   format       = "AVRO"
-  schema       = file("../Schemas/jobseekerv1.avsc")
+  schema       = file("../Schemas/source_docs_v1.avsc")
   credentials {
     key    = confluent_api_key.genaidemo-manager-schema-registry-api-key.id
     secret = confluent_api_key.genaidemo-manager-schema-registry-api-key.secret
@@ -225,16 +225,16 @@ resource "confluent_schema" "jobseekerv1" {
 }
 
 
-# jobseekerresv1 schema
-resource "confluent_schema" "jobseekerresv1" {
+# docs_chatbotreq_v1 schema
+resource "confluent_schema" "docs_chatbotreq_v1" {
   schema_registry_cluster {
     id = data.confluent_schema_registry_cluster.advanced.id
   }
   rest_endpoint = data.confluent_schema_registry_cluster.advanced.rest_endpoint
   # https://developer.confluent.io/learn-kafka/schema-registry/schema-subjects/#topicnamestrategy
-  subject_name = "${confluent_kafka_topic.jobseekerresv1.topic_name}-value"
+  subject_name = "${confluent_kafka_topic.docs_chatbotreq_v1.topic_name}-value"
   format       = "AVRO"
-  schema       = file("../Schemas/jobseekerresv1.avsc")
+  schema       = file("../Schemas/docs_chatbotreq_v1.avsc")
   credentials {
     key    = confluent_api_key.genaidemo-manager-schema-registry-api-key.id
     secret = confluent_api_key.genaidemo-manager-schema-registry-api-key.secret
@@ -242,48 +242,48 @@ resource "confluent_schema" "jobseekerresv1" {
 }
 
 
-# jobpostreq schema
-resource "confluent_schema" "jobpostreq" {
+# docs_chatbotres_step_1 schema
+resource "confluent_schema" "docs_chatbotres_step_1" {
   schema_registry_cluster {
     id = data.confluent_schema_registry_cluster.advanced.id
   }
   rest_endpoint = data.confluent_schema_registry_cluster.advanced.rest_endpoint
   # https://developer.confluent.io/learn-kafka/schema-registry/schema-subjects/#topicnamestrategy
-  subject_name = "${confluent_kafka_topic.jobpostreq.topic_name}-value"
+  subject_name = "${confluent_kafka_topic.docs_chatbotres_step_1.topic_name}-value"
   format       = "AVRO"
-  schema       = file("../Schemas/jobpostreq.avsc")
+  schema       = file("../Schemas/docs_chatbotres_step_1.avsc")
   credentials {
     key    = confluent_api_key.genaidemo-manager-schema-registry-api-key.id
     secret = confluent_api_key.genaidemo-manager-schema-registry-api-key.secret
   }
 }
 
-# jobpostresv2 schema
-resource "confluent_schema" "jobpostresv2" {
+# docs_chatbotres_step_final_v1-key schema
+resource "confluent_schema" "docs_chatbotres_step_final_v1-key" {
   schema_registry_cluster {
     id = data.confluent_schema_registry_cluster.advanced.id
   }
   rest_endpoint = data.confluent_schema_registry_cluster.advanced.rest_endpoint
   # https://developer.confluent.io/learn-kafka/schema-registry/schema-subjects/#topicnamestrategy
-  subject_name = "${confluent_kafka_topic.jobpostresv2.topic_name}-value"
+  subject_name = "${confluent_kafka_topic.docs_chatbotres_step_final_v1.topic_name}-key"
   format       = "AVRO"
-  schema       = file("../Schemas/jobpostresv2.avsc")
+  schema       = file("../Schemas/docs_chatbotres_step_final_v1-key.avsc")
   credentials {
     key    = confluent_api_key.genaidemo-manager-schema-registry-api-key.id
     secret = confluent_api_key.genaidemo-manager-schema-registry-api-key.secret
   }
 }
 
-# uploaddocs schema
-resource "confluent_schema" "uploaddocs" {
+# docs_chatbotres_step_final_v1-value schema
+resource "confluent_schema" "docs_chatbotres_step_final_v1-value" {
   schema_registry_cluster {
     id = data.confluent_schema_registry_cluster.advanced.id
   }
   rest_endpoint = data.confluent_schema_registry_cluster.advanced.rest_endpoint
   # https://developer.confluent.io/learn-kafka/schema-registry/schema-subjects/#topicnamestrategy
-  subject_name = "${confluent_kafka_topic.uploaddocs.topic_name}-value"
+  subject_name = "${confluent_kafka_topic.docs_chatbotres_step_final_v1.topic_name}-value"
   format       = "AVRO"
-  schema       = file("../Schemas/uploaddocs.avsc")
+  schema       = file("../Schemas/docs_chatbotres_step_final_v1.avsc")
   credentials {
     key    = confluent_api_key.genaidemo-manager-schema-registry-api-key.id
     secret = confluent_api_key.genaidemo-manager-schema-registry-api-key.secret
@@ -291,13 +291,13 @@ resource "confluent_schema" "uploaddocs" {
 }
 
 
-# Create jobseekerv1 topic
-resource "confluent_kafka_topic" "jobseekerv1" {
+# Create source_docs_v1 topic
+resource "confluent_kafka_topic" "source_docs_v1" {
   kafka_cluster {
     id = confluent_kafka_cluster.dedicated.id
   }
 
-  topic_name       = "jobseekerv1"
+  topic_name       = "source_docs_v1"
   rest_endpoint    = confluent_kafka_cluster.dedicated.rest_endpoint
   partitions_count = 1
   credentials {
@@ -306,13 +306,13 @@ resource "confluent_kafka_topic" "jobseekerv1" {
   }
 }
 
-# Create jobpostreq topic jobpostreq
-resource "confluent_kafka_topic" "jobpostreq" {
+# Create docs_chatbotreq_v1 topic docs_chatbotreq_v1
+resource "confluent_kafka_topic" "docs_chatbotreq_v1" {
   kafka_cluster {
     id = confluent_kafka_cluster.dedicated.id
   }
 
-  topic_name       = "jobpostreq"
+  topic_name       = "docs_chatbotreq_v1"
   rest_endpoint    = confluent_kafka_cluster.dedicated.rest_endpoint
   partitions_count = 1
   credentials {
@@ -321,14 +321,14 @@ resource "confluent_kafka_topic" "jobpostreq" {
   }
 }
 
-# Create jobseekerresv1 topic jobseekerresv1
+# Create docs_chatbotres_step_1 topic docs_chatbotres_step_1
 
-resource "confluent_kafka_topic" "jobseekerresv1" {
+resource "confluent_kafka_topic" "docs_chatbotres_step_1" {
   kafka_cluster {
     id = confluent_kafka_cluster.dedicated.id
   }
 
-  topic_name       = "jobseekerresv1"
+  topic_name       = "docs_chatbotres_step_1"
   rest_endpoint    = confluent_kafka_cluster.dedicated.rest_endpoint
   partitions_count = 1
   credentials {
@@ -337,14 +337,14 @@ resource "confluent_kafka_topic" "jobseekerresv1" {
   }
 }
 
-# Create jobpostresv2 topic jobpostresv2
+# Create docs_chatbotres_step_final_v1 topic docs_chatbotres_step_final_v1
 
-resource "confluent_kafka_topic" "jobpostresv2" {
+resource "confluent_kafka_topic" "docs_chatbotres_step_final_v1" {
   kafka_cluster {
     id = confluent_kafka_cluster.dedicated.id
   }
 
-  topic_name       = "jobpostresv2"
+  topic_name       = "docs_chatbotres_step_final_v1"
   rest_endpoint    = confluent_kafka_cluster.dedicated.rest_endpoint
   partitions_count = 1
   credentials {
@@ -353,14 +353,14 @@ resource "confluent_kafka_topic" "jobpostresv2" {
   }
 }
 
-# Create docembedding topic docembedding
+# Create trades_realtime topic trades_realtime
 
-resource "confluent_kafka_topic" "uploaddocs" {
+resource "confluent_kafka_topic" "trades_realtime" {
   kafka_cluster {
     id = confluent_kafka_cluster.dedicated.id
   }
 
-  topic_name       = "uploaddocs"
+  topic_name       = "trades_realtime"
   rest_endpoint    = confluent_kafka_cluster.dedicated.rest_endpoint
   partitions_count = 1
   credentials {
@@ -387,38 +387,9 @@ resource "confluent_flink_compute_pool" "genaiflink" {
 }
 
 
-# Create careerguide
-
-resource "confluent_flink_statement" "create-careerguide-flink" {
-  organization {
-    id = data.confluent_organization.main.id
-  }
-  environment {
-    id = confluent_environment.genaidemo.id
-  }
-  compute_pool {
-    id = confluent_flink_compute_pool.genaiflink.id
-  }
-  principal {
-    id = confluent_service_account.statements-runner.id
-  }
-  # https://docs.confluent.io/cloud/current/flink/reference/example-data.html#marketplace-database
-  statement = file("../Statements/create-careerguide-flink.sql")
-  properties = {
-    "sql.current-catalog"  = confluent_environment.genaidemo.display_name
-    "sql.current-database" = confluent_kafka_cluster.dedicated.display_name
-    "sql.secrets.openaikey" = var.openai_key
-  }
-  rest_endpoint = data.confluent_flink_region.genaidemoflink.rest_endpoint
-  credentials {
-    key    = confluent_api_key.genaidemo-manager-flink-api-key.id
-    secret = confluent_api_key.genaidemo-manager-flink-api-key.secret
-  }
-}
-
 # Create AI model
 
-resource "confluent_flink_statement" "model-profileembedding" {
+resource "confluent_flink_statement" "model-textembedding" {
   organization {
     id = data.confluent_organization.main.id
   }
@@ -432,7 +403,7 @@ resource "confluent_flink_statement" "model-profileembedding" {
     id = confluent_service_account.statements-runner.id
   }
   # https://docs.confluent.io/cloud/current/flink/reference/example-data.html#marketplace-database
-  statement = file("../Statements/model-profileembedding.sql")
+  statement = file("../Statements/model-textembedding.sql")
   properties = {
     "sql.current-catalog"  = confluent_environment.genaidemo.display_name
     "sql.current-database" = confluent_kafka_cluster.dedicated.display_name
@@ -445,9 +416,9 @@ resource "confluent_flink_statement" "model-profileembedding" {
   }
 }
 
-# create jobseekerprofilev3
+# create document embeddings
 
-resource "confluent_flink_statement" "create-jobseekerprofilev3" {
+resource "confluent_flink_statement" "create-documentembeddings" {
   organization {
     id = data.confluent_organization.main.id
   }
@@ -461,7 +432,7 @@ resource "confluent_flink_statement" "create-jobseekerprofilev3" {
     id = confluent_service_account.statements-runner.id
   }
   # https://docs.confluent.io/cloud/current/flink/reference/example-data.html#marketplace-database
-  statement = file("../Statements/create-jobseekerprofilev3.sql")
+  statement = file("../Statements/create-embeddings.sql")
   properties = {
     "sql.current-catalog"  = confluent_environment.genaidemo.display_name
     "sql.current-database" = confluent_kafka_cluster.dedicated.display_name
@@ -474,9 +445,9 @@ resource "confluent_flink_statement" "create-jobseekerprofilev3" {
   }
 }
 
-# create jobseekerprofilev3
+# insert document embeddings
 
-resource "confluent_flink_statement" "create-jobseeker-enriched" {
+resource "confluent_flink_statement" "insert-documentembeddings" {
   organization {
     id = data.confluent_organization.main.id
   }
@@ -490,7 +461,7 @@ resource "confluent_flink_statement" "create-jobseeker-enriched" {
     id = confluent_service_account.statements-runner.id
   }
   # https://docs.confluent.io/cloud/current/flink/reference/example-data.html#marketplace-database
-  statement = file("../Statements/create-jobseeker-enriched.sql")
+  statement = file("../Statements/insert-embeddings.sql")
   properties = {
     "sql.current-catalog"  = confluent_environment.genaidemo.display_name
     "sql.current-database" = confluent_kafka_cluster.dedicated.display_name
@@ -503,9 +474,9 @@ resource "confluent_flink_statement" "create-jobseeker-enriched" {
   }
 }
 
-# create jobseekerprofilev3
+# create trades data
 
-resource "confluent_flink_statement" "create-doc-embedding" {
+resource "confluent_flink_statement" "create-realtimetrades" {
   organization {
     id = data.confluent_organization.main.id
   }
@@ -519,7 +490,7 @@ resource "confluent_flink_statement" "create-doc-embedding" {
     id = confluent_service_account.statements-runner.id
   }
   # https://docs.confluent.io/cloud/current/flink/reference/example-data.html#marketplace-database
-  statement = file("../Statements/create-doc-embeddings.sql")
+  statement = file("../Statements/create-trades-data.sql")
   properties = {
     "sql.current-catalog"  = confluent_environment.genaidemo.display_name
     "sql.current-database" = confluent_kafka_cluster.dedicated.display_name
@@ -532,9 +503,9 @@ resource "confluent_flink_statement" "create-doc-embedding" {
   }
 }
 
-# Insert career guide data
+# insert trades data enrichment
 
-resource "confluent_flink_statement" "insert-career-guide" {
+resource "confluent_flink_statement" "insert-trades-data" {
   organization {
     id = data.confluent_organization.main.id
   }
@@ -548,7 +519,7 @@ resource "confluent_flink_statement" "insert-career-guide" {
     id = confluent_service_account.statements-runner.id
   }
   # https://docs.confluent.io/cloud/current/flink/reference/example-data.html#marketplace-database
-  statement = file("../Statements/insert-careerguide-flink.sql")
+  statement = file("../Statements/Insert-trades-data.sql")
   properties = {
     "sql.current-catalog"  = confluent_environment.genaidemo.display_name
     "sql.current-database" = confluent_kafka_cluster.dedicated.display_name
@@ -561,9 +532,9 @@ resource "confluent_flink_statement" "insert-career-guide" {
   }
 }
 
-# Insert doc embeddings
+# create chat response final
 
-resource "confluent_flink_statement" "insert-doc-embeddings" {
+resource "confluent_flink_statement" "create-chat-res-final" {
   organization {
     id = data.confluent_organization.main.id
   }
@@ -577,7 +548,7 @@ resource "confluent_flink_statement" "insert-doc-embeddings" {
     id = confluent_service_account.statements-runner.id
   }
   # https://docs.confluent.io/cloud/current/flink/reference/example-data.html#marketplace-database
-  statement = file("../Statements/insert-doc-embeddings.sql")
+  statement = file("../Statements/create-chatres-final.sql")
   properties = {
     "sql.current-catalog"  = confluent_environment.genaidemo.display_name
     "sql.current-database" = confluent_kafka_cluster.dedicated.display_name
@@ -590,9 +561,9 @@ resource "confluent_flink_statement" "insert-doc-embeddings" {
   }
 }
 
-# Insert insert-jobseeker-enriched
+# Insert chat response final
 
-resource "confluent_flink_statement" "insert-jobseeker-enriched" {
+resource "confluent_flink_statement" "insert-chat-response-final" {
   organization {
     id = data.confluent_organization.main.id
   }
@@ -606,7 +577,7 @@ resource "confluent_flink_statement" "insert-jobseeker-enriched" {
     id = confluent_service_account.statements-runner.id
   }
   # https://docs.confluent.io/cloud/current/flink/reference/example-data.html#marketplace-database
-  statement = file("../Statements/insert-jobseeker-enriched.sql")
+  statement = file("../Statements/insert-chat-res-final.sql")
   properties = {
     "sql.current-catalog"  = confluent_environment.genaidemo.display_name
     "sql.current-database" = confluent_kafka_cluster.dedicated.display_name
@@ -619,34 +590,6 @@ resource "confluent_flink_statement" "insert-jobseeker-enriched" {
   }
 }
 
-# Insert insert-jobseekerprofilev3
-
-resource "confluent_flink_statement" "insert-jobseekerprofilev3" {
-  organization {
-    id = data.confluent_organization.main.id
-  }
-  environment {
-    id = confluent_environment.genaidemo.id
-  }
-  compute_pool {
-    id = confluent_flink_compute_pool.genaiflink.id
-  }
-  principal {
-    id = confluent_service_account.statements-runner.id
-  }
-  # https://docs.confluent.io/cloud/current/flink/reference/example-data.html#marketplace-database
-  statement = file("../Statements/insert-jobseekerprofilev3.sql")
-  properties = {
-    "sql.current-catalog"  = confluent_environment.genaidemo.display_name
-    "sql.current-database" = confluent_kafka_cluster.dedicated.display_name
-    "sql.secrets.openaikey" = var.openai_key
-  }
-  rest_endpoint = data.confluent_flink_region.genaidemoflink.rest_endpoint
-  credentials {
-    key    = confluent_api_key.genaidemo-manager-flink-api-key.id
-    secret = confluent_api_key.genaidemo-manager-flink-api-key.secret
-  }
-}
 
 
 

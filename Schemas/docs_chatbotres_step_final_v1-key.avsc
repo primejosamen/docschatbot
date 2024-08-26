@@ -1,0 +1,23 @@
+{
+  "fields": [
+    {
+      "default": null,
+      "name": "session_id",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "default": null,
+      "name": "reqid",
+      "type": [
+        "null",
+        "string"
+      ]
+    }
+  ],
+  "name": "record",
+  "namespace": "org.apache.flink.avro.generated",
+  "type": "record"
+}

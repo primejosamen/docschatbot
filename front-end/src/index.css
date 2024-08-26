@@ -1,0 +1,295 @@
+*{
+  margin: 0;
+  padding: 0;
+  
+}
+html{
+  width: 100%;
+  background-color: #fff2e6;
+  height: 100%;
+}
+
+.info {background-color: #fff2e6;}
+.label {
+  color: black;
+  padding: 8px;
+}
+.pagebody{
+background-color: #fff2e6;
+height: 100%;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  /*display: flex;*/
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.btn {
+    padding: 5px;
+    display: inline;
+    border-radius: 1px;
+    font-family: "Arial";
+    border: 0;
+    margin: 0 5px;
+    font-size: 15px;
+    line-height: 5px;
+    color: white;
+    width: auto;
+    height: auto;
+}
+
+.btn.btn-primary:focus, .btn.btn-primary.focus {
+  box-shadow: 0 0 0 0.5rem rgba(173, 137, 125, 0.5);
+}
+.pdf-container{
+  width: 50%;
+  height: 600px;
+  background-color: #e4e4e4;
+  overflow-y: auto;
+  /*display: flex;*/
+  justify-content: center;
+  align-items: center;
+}
+
+.column1{
+width: 100%;
+height: 700px;
+}
+
+.column2{
+width: 50%;
+height: 800px;
+}
+
+.viewjobscolumn1{
+width: 40%;
+height: 100%;
+}
+
+.viewjobscolumn2{
+width: 60%;
+height: 80%;
+}
+
+.homecolumn1{
+width: 60%;
+height: 90%;
+}
+.homecolumn2{
+width: 80%;
+height: 69px;
+
+}
+
+.profilecolumn1{
+width: 50%;
+height: 800px;
+}
+
+.profilecolumn2{
+width: 50%;
+height: 800px;
+}
+.columnpost{
+background-color: #eee;
+width: 80%;
+height: 600px;
+}
+.columncard{
+width: 25%;
+height: 600px;
+}
+.column3{
+background-color: #eee;
+width: 45%;
+white-space: pre-line;
+height: 600px;
+overflow-x: hidden;
+overflow-y: auto;
+text-align:justify;
+font-size: 12px;
+border-style: double;
+}
+
+.center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.error-msg{
+  width: 100%;
+  color: red;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.vertical-rec-tabs {
+  margin: auto;
+  /*background-image: url("./images.png");
+  background-color:#08B6B1;
+  background-color:#d66347 ;*/
+  top: 5px;
+  height: 900px;
+  /*display: flex;*/
+  left: 10px;
+  position: relative;
+  width: 80%;
+  border: 1px solid green;
+  padding: 10px;
+  width: 55%;
+}
+.midcontainer{
+  left: 20px;
+}
+.vertical-job-tabs {
+  margin: auto;
+  /*background-image: url("./images.png");
+  background-color:Gray ;*/
+  top: 5px;
+  height: 600px;
+  /*display: flex;*/
+  left: 0%;
+  position: relative;
+  width: 100%;
+  border: 1px solid green;
+  padding: 10px;
+}
+
+
+.navbar {
+  width: 125%;
+  min-height: 8vh;
+  /*display: flex;*/
+  justify-content: space-around;
+  align-items: right;
+  color: #000;
+  /*background: rgba(29, 161, 242, 1);*/
+  border-bottom: 1px solid #BBBBBB;
+}
+
+.navbar .nav-links {
+  width: 20%;
+  /*display: flex;*/
+  justify-content: space-around;
+  list-style: none;
+}
+
+.navbar .nav-links>a{
+  color: #000;
+  text-decoration: underline;
+}
+
+.navbar ul a.active {
+ color: rgb(34 197 94);
+}
+
+/* vertical tabs on job seeker*/
+
+
+.tab-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.horizantal-tab-list {
+  display: flex;
+  flex-direction: row;
+}
+
+.row{
+background-color: #fff2e6;
+height: 100%;
+width: 100%
+}
+
+.initialText {
+    font-size: 18px;
+    color: red;
+}
+.delayedText {
+    text-align: center;
+    font-size: 22px;
+    color: red;
+}
+
+.tab {
+  padding: 10px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.active {
+  color: green;
+}
+
+.tab-content {
+  padding: 10px;
+  width: 100%;
+  height: 100%;
+}
+
+.app-chatbot-button {
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+  padding: 10px;
+  color: #fff;
+  background-color: #0d2d44;
+  border: none;
+  position: fixed;
+  bottom: 25px;
+  z-index: 9999;
+  right: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.app-chatbot-container {
+  margin: 40px 0;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  right: 40px;
+  bottom: 55px;
+  z-index: 9999;
+  box-shadow: 5px 5px 13px rgba(91, 81, 81, 0.4);
+  border-radius: 5px;
+}
+.app-chatbot-button-icon {
+  fill: #fff;
+}
+.jobportalhome{
+    /*background-image: url("./Jobportal.jpeg");*/
+    background-color: #FFFF00;
+    background-repeat: no-repeat;
+}
+
+.viewresume{
+    /*background-image: url("./Jobportal.jpeg");*/
+    background-color:#839192;
+    background-repeat: no-repeat;
+}
+.container{
+    /*background-image: url("./Jobportal.jpeg");
+    background-color: #FFFF00;*/
+    background-repeat: no-repeat;
+    height: 100%;
+    width: 90%;
+
+}
+
+.airesponse{
+white-space: pre-wrap;
+}
+
+
