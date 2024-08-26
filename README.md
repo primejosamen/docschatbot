@@ -162,20 +162,20 @@ cd services
 Install python modules
 
 ```
-pip install PyPDF2
-pip install gcc
-pip install confluent-kafka
-pip install langchain
-pip install fastavro
-pip install pymongo
-pip install flask
-pip install openai
-pip install pyopenssl
-pip install --quiet langchain_experimental
-pip install flask_socketio
-pip install flask_cors
-pip install avro-python3
-pip install jproperties
+pip3 install PyPDF2
+pip3 install gcc
+pip3 install confluent-kafka
+pip3 install langchain
+pip3 install fastavro
+pip3 install pymongo
+pip3 install flask
+pip3 install openai
+pip3 install pyopenssl
+pip3 install --quiet langchain_experimental
+pip3 install flask_socketio
+pip3 install flask_cors
+pip3 install avro-python3
+pip3 install jproperties
 
 ```
 Set the env-vars
