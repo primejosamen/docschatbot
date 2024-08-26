@@ -31,11 +31,11 @@ This experience typically includes the following features:
 
 ## Demo-Video
 
+## How to run this Demo:
 
+### Prerequisites
 
-# Prerequisites
-
-## Confluent Cloud
+#### Confluent Cloud
 
 <<<<<<< Updated upstream
 Demo:
@@ -53,7 +53,7 @@ You need a working account for Confluent Cloud. Sign-up with Confluent Cloud is 
 1. Create Confluent Cloud API keys by following [this](https://registry.terraform.io/providers/confluentinc/confluent/latest/docs/guides/sample-project#summary) guide.
    > **Note:** This is different than Kafka cluster API keys.
 
-## MongoDB Atlas
+#### MongoDB Atlas
 
 1. Sign up for a free MongoDB Atlas account [here](https://www.mongodb.com/).
 
