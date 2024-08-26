@@ -186,8 +186,22 @@ export OPENAI_API_KEY=<<MONGO_URL>>
 ```
 Run the python programs to receive data from UI and integrate with Confluent cloud
 ```
+python3 server.py
 python3 genaidocsexplorer.py -f client.properties -chatbotreq docs_chatbotreq_v1
 python3 asyngenaichatres.py -f client.properties -chatbotresfinal docs_chatbotres_step_final_v1
 python3 asyngenaichat.py -f client.properties -chatbotreq docs_chatbotreq_v1 -chatbotres docs_chatbotres_step_1 -chatbotresfinal docs_chatbotres_step_final_v1
 ```
+## Run front-end code
+
+Navigate to front-end
+
+```
+cd front-end
+npm install
+npm start
+```
+Go to browser try accessing UI: http://localhost:3000/
+
+
+
 
