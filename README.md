@@ -1,6 +1,8 @@
 # genai-docsbot
 
-A web portal that enables a GenAI chatbot experience on PDF documents allows users to interact with their documents through a generative AI-powered chatbot. This experience typically includes the following features:
+A web portal that enables a GenAI chatbot experience on PDF documents allows users to interact with their documents through a generative AI-powered chatbot. This kind of portal is particularly useful in scenarios like legal document review, academic research, business reporting, and any other context where interacting with large volumes of text-based information is required.
+
+This experience typically includes the following features:
 
 1. **Data augmentation**:
    
@@ -10,18 +12,24 @@ A web portal that enables a GenAI chatbot experience on PDF documents allows use
    * The platform processes these documents by splitting them into individual pages and publishing each page's content, along with relevant metadata, to a Confluent Kafka topic.
    * A fully managed Confluent Flink service then generates vector representations of the document data and publishes these vector embeddings to another Confluent topic.
    * A fully managed MongoDB sink connector reads the vector data from the topic and stores the vector embeddings. The documents are now prepared for chatbot queries.
+   * Create search index on vector embeddings field in MongoDB
 
 
-
-3. **AI-Powered Interaction**: The portal is integrated with a generative AI model (like GPT) that can read, understand, and interact with the content of the documents. Users can ask the chatbot questions related to the document, request summaries, seek clarifications, or ask for specific sections or details. The AI can generate responses based on the content of the documents.
+2. **AI-Powered Interaction**: The portal is integrated with a generative AI model (like GPT) that can read, understand, and interact with the content of the documents. Users can ask the chatbot questions related to the document, request summaries, seek clarifications, or ask for specific sections or details. The AI can generate responses based on the content of the documents.
    
    Data Inference flow:
 ![Data Inference flow](img/DataInference.jpeg)
-   
 
-5. **Contextual Understanding**: The chatbot can understand the context of questions in relation to the document's content, making the interaction more meaningful and accurate. It can pull information, generate summaries, and provide insights based on the document's data.
+   * Users submits query through chatbot prompt, python microservices receives request on HTTP and generate an event to Confluent topic.
+   * Python-Kafka consumer receives chatbot request, query vector store (MongoDB) using vector search and pass the information to OpenAI to get an answer
+   * In the given answer, if there are any reference transactions mentioned. Confluent Flink enrich the answer using real time data from other private data sources.
+   * Once the answer is fully enriched, A Python-Kafka consumer receives the final response from topic and sends to chatbot using websocet
+   * The final response is sinked to a data store to enable for analytical and auditing use cases
+   * If the user question is already answered, workflow query the datastore and respond back to the chatbot.
 
-This kind of portal is particularly useful in scenarios like legal document review, academic research, business reporting, and any other context where interacting with large volumes of text-based information is required.
+3. **Contextual Understanding**: The chatbot can understand the context of questions in relation to the document's content, making the interaction more meaningful and accurate. It can pull information, generate summaries, and provide insights based on the document's data.
+
+## Demo-Video
 
 
 
