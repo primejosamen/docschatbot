@@ -34,6 +34,21 @@ This experience typically includes the following features:
 ## Demo Setup:
 
 ### Prerequisites
+#### Tools
+* install git to clone the source
+  https://git-scm.com/book/it/v2/Per-Iniziare-Installing-Git
+  ```
+  yum install git
+  ```
+* install npm to install UI dependency packages (below example to install npm from yum package)
+  ```
+  yum install npm
+  ```
+* install python3
+  ```
+  yum install python3
+  yum install --assumeyes python3-pip
+  ```
 
 #### Confluent Cloud
 
@@ -64,8 +79,8 @@ You need a working account for Confluent Cloud. Sign-up with Confluent Cloud is 
 1. Clone and enter this repository.
 
    ```bash
-   git clone https://github.com/gopi0518/jobportal-genai.git
-   cd jobportal-genai
+   git clone https://github.com/gopi0518/docschatbot.git
+   cd docschatbot
    ```
 
 1. Create an `.accounts` file by running the following command.
@@ -92,7 +107,6 @@ You need a working account for Confluent Cloud. Sign-up with Confluent Cloud is 
 1. Navigate to the home directory of the project and run `create_env.sh` script. This bash script copies the content of `.accounts` file into a new file called `.env` and append additional variables to it.
 
    ```bash
-   cd jobportal-genai
    ./create_env.sh
    ```
 
