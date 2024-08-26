@@ -154,6 +154,11 @@ cd jobportal-genai
 source .env
 ```
 ## Run python services
+Navigate to services directory and excute the remaining steps in this section
+
+```
+cd services
+```
 Install python modules
 
 ```
@@ -172,5 +177,17 @@ pip install flask_cors
 pip install avro-python3
 pip install jproperties
 
+```
+Set the env-vars
+
+```
+export OPENAI_API_KEY=<<OPEN_API_KEY>>
+export OPENAI_API_KEY=<<MONGO_URL>>
+```
+Run the python programs to receive data from UI and integrate with Confluent cloud
+```
+python3 genaidocsexplorer.py -f client.properties -chatbotreq docs_chatbotreq_v1
+python3 asyngenaichatres.py -f client.properties -chatbotresfinal docs_chatbotres_step_final_v1
+python3 asyngenaichat.py -f client.properties -chatbotreq docs_chatbotreq_v1 -chatbotres docs_chatbotres_step_1 -chatbotresfinal docs_chatbotres_step_final_v1
 ```
 
