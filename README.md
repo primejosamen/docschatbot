@@ -4,12 +4,13 @@ A web portal that enables a GenAI chatbot experience on PDF documents allows use
 
 1. **Data augmentation**:
    
-   * Users uploading financial or account summary documents in PDF format.
-   * The platform processes these documents by dividing them into pages and publishing each page's content, along with relevant metadata, to a Confluent Kafka topic.
-   * A fully managed Confluent Flink service is then used to create vector representations of the document data for more efficient AI interactions and queries.
-
-   Data Augmentation flow:
+     Data Augmentation flow:
 ![Data Augmentation flow](img/DataAugmentation.jpeg)
+   
+   * Users upload financial or account summary documents in PDF format.
+   * The platform processes these documents by splitting them into individual pages and publishing each page's content, along with relevant metadata, to a Confluent Kafka topic.
+   * A fully managed Confluent Flink service then generates vector representations of the document data and publishes these vector embeddings to another Confluent topic.
+   * A fully managed MongoDB sink connector reads the vector data from the topic and stores the vector embeddings. The documents are now prepared for chatbot queries.
 
 
 
