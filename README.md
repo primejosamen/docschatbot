@@ -169,6 +169,21 @@ Set the env-vars
 export OPENAI_API_KEY=<<OPEN_API_KEY>>
 export OPENAI_API_KEY=<<MONGO_URL>>
 ```
+Create client.properties file with Confluent connection parameters (this is needed for python services to run)
+```
+cat > client.properties
+bootstrap.servers=<<confluent_cloud_bootstrap_url>>
+security.protocol=SASL_SSL
+sasl.mechanisms=PLAIN
+sasl.username=<<CCLOUD_API_KEY>>
+sasl.password=<<CCLOUD_API_SECRET>>
+session.timeout.ms=45000
+schema.registry.url=<<confluent_cloud_schema_registry>>
+basic.auth.credentials.source=USER_INFO
+basic.auth.user.info=<<SR_API_KEY>>:<<<<SR_API_SECRET>>
+group.id=genai
+auto.offset.reset=earliest
+```
 Run the python programs to receive data from UI and integrate with Confluent cloud
 ```
 python3 server.py
