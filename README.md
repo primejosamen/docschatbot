@@ -4,7 +4,6 @@ A web portal that enables a GenAI chatbot experience on PDF documents allows use
 
 1. **Data augmentation**:
    
-     Data Augmentation flow:
 ![Data Augmentation flow](img/DataAugmentation.jpeg)
    
    * Users upload financial or account summary documents in PDF format.
