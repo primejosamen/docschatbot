@@ -151,7 +151,7 @@ cd jobportal-genai
 * Updates the .env file to replace the remaining variables with the newly generated values.
 2. Source .env file
 ```
-source .env file.
+source .env
 ```
 ## Run python services
 Install python modules
