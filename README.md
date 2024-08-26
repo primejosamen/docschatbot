@@ -143,22 +143,20 @@ terraform output -json > ../resources.json
 cd jobportal-genai
 ./setup.sh
 ```
-This script achieves the following:
+1. This script achieves the following:
 
 * Creates an API key pair that will be used in connectors' configuration files for authentication purposes.
 * Creates an API key pair for Schema Registry
 * Creates Tags and business metadata
 * Updates the .env file to replace the remaining variables with the newly generated values.
-Source .env file
+2. Source .env file
 ```
 source .env file.
-
+```
 ## Run python services
-
 Install python modules
 
 ```
-
 pip install PyPDF2
 pip install gcc
 pip install confluent-kafka
