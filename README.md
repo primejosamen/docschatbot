@@ -117,7 +117,7 @@ You need a working account for Confluent Cloud. Sign-up with Confluent Cloud is 
    ```
 
    > **Note:** if you don't source `.env` file you'll be prompted to manually provide the values through command line when running Terraform commands.
-## Build your cloud infrastructure
+## Build your Confluent cloud infrastructure
 1. Navigate to the repo's terraform directory.
 ```
 cd terraform
