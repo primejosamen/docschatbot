@@ -67,11 +67,12 @@ uploaddoc_avro_serializer = AvroSerializer(
 schema_registry_client = schema_registry_client,
 schema_str =  ccloud_lib.uploaddoc_schema,
 to_dict = ccloud_lib.Uploaddoc.uploaddoc_to_dict)
-ELASTIC_PASSWORD = "<<ELASTIC_PASSWORD>>"
+ELASTIC_CLOUD = os.environ["ELASTIC_CLOUD"]
+ELASTIC_CLOUD_PASSWORD = os.environ["ELASTIC_CLOUD_PASSWORD"]
 
 # Found in the 'Manage Deployment' page
-CLOUD_ID = "<<CLOUD_ID>>"
-client = Elasticsearch(cloud_id=CLOUD_ID,basic_auth=("elastic", ELASTIC_PASSWORD))
+CLOUD_ID = ELASTIC_CLOUD
+client = Elasticsearch(cloud_id=CLOUD_ID,basic_auth=("elastic", ELASTIC_CLOUD_PASSWORD))
 
 message_count = 0
 waiting_count = 0
