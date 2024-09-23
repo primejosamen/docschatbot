@@ -71,7 +71,7 @@ You need a working account for Confluent Cloud. Sign-up with Confluent Cloud is 
 
 2. Reset password for `elastic` user in Elastic cloud cluster. Follow the instructions [here](https://www.elastic.co/guide/en/cloud-enterprise/current/ece-password-reset-elastic.html).
 3. Get the elastic cloud id. Follow the instruction [here](https://www.elastic.co/search-labs/tutorials/install-elasticsearch/elastic-cloud).
-   **Note:** Elastic cloud id and password are needed for python service to connect
+   > **Note:** Elastic cloud id and password are needed for python service to connect
 
 # Setup
 
