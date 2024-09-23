@@ -35,6 +35,8 @@ from langchain.vectorstores import MongoDBAtlasVectorSearch
 from langchain.chains import RetrievalQA
 from langchain.chat_models import ChatOpenAI
 OPENAIKEY = os.environ["OPENAI_API_KEY"]
+ELASTIC_CLOUD = os.environ["ELASTIC_CLOUD"]
+ELASTIC_CLOUD_PASSWORD = os.environ["ELASTIC_CLOUD_PASSWORD"]
 llm = ChatOpenAI(
     api_key=os.environ["OPENAI_API_KEY"],
     model="gpt-4o",
@@ -77,11 +79,11 @@ def create_vector_search():
     Creates a MongoDBAtlasVectorSearch object using the connection string, database, and collection names, along with the OpenAI embeddings and index configuration.
     """
     elastic_vector_search = ElasticsearchStore(
-        es_cloud_id="<<ELASTIC_CLOUD>>",
+        es_cloud_id=ELASTIC_CLOUD,
         index_name="doc_embeddings_elastic_v2",
         embedding=embeddings,
         es_user="elastic",
-        es_password="<<ELASTIC_PASSWORD>>",
+        es_password=ELASTIC_CLOUD_PASSWORD,
     )
     return elastic_vector_search
 message_count = 0
