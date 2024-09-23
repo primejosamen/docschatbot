@@ -33,7 +33,7 @@ from langchain.llms import OpenAI
 # initialize socketio client
 sio = socketio.Client(logger=True, engineio_logger=True)
 sio.sleep(0)
-sio.connect('http://ec2-54-167-196-238.compute-1.amazonaws.com:5001')
+sio.connect('http://localhost:5001')
 args = ccloud_lib.parse_args()
 config_file = args.config_file
 chatbotreqtopic = args.chatbotreqtopic
