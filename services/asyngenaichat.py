@@ -54,7 +54,7 @@ memory = ConversationBufferMemory(
             )
 # initialize socketio client
 # sio = socketio.Client(logger=True, engineio_logger=True)
-# sio.connect('http://ec2-3-87-26-1.compute-1.amazonaws.com:5001')
+# sio.connect('http://localhost:5001')
 args = ccloud_lib.parse_args()
 config_file = args.config_file
 chatbotreqtopic = args.chatbotreqtopic
