@@ -11,8 +11,8 @@ This experience typically includes the following features:
    * Users upload financial or account summary documents in PDF format.
    * The platform processes these documents by splitting them into individual pages and publishing each page's content, along with relevant metadata, to a Confluent Kafka topic.
    * A fully managed Confluent Flink service then generates vector representations of the document data and publishes these vector embeddings to another Confluent topic.
-   * A fully managed MongoDB sink connector reads the vector data from the topic and stores the vector embeddings. The documents are now prepared for chatbot queries.
-   * Create search index on vector embeddings field in MongoDB
+   * A fully managed Elastic sink connector reads the vector data from the topic and stores the vector embeddings. The documents are now prepared for chatbot queries.
+   * Create search index on vector embeddings field in Elastic
 
 
 2. **AI-Powered Interaction**: The portal is integrated with a generative AI model (like GPT) that can read, understand, and interact with the content of the documents. Users can ask the chatbot questions related to the document, request summaries, seek clarifications, or ask for specific sections or details. The AI can generate responses based on the content of the documents.
@@ -21,7 +21,7 @@ This experience typically includes the following features:
 ![Data Inference flow](img/DataInference.jpeg)
 
    * Users submits query through chatbot prompt, python microservice receives request on HTTP and generate an event to Confluent topic.
-   * Python-Kafka consumer receives chatbot request, query vector store (MongoDB) using vector search and pass the information to OpenAI to get an answer.
+   * Python-Kafka consumer receives chatbot request, query vector store (Elastic) using vector search and pass the information to OpenAI to get an answer.
    * In the given answer, if there are any reference transactions mentioned, Confluent Flink enrich the answer using real time data from other private data sources.
    * Once the answer is fully enriched, A Python-Kafka consumer receives the final response from topic and sends to chatbot using websocket.
    * The final response is sinked to a data store to enable for analytical and auditing use cases.
@@ -65,11 +65,11 @@ You need a working account for Confluent Cloud. Sign-up with Confluent Cloud is 
 1. Create Confluent Cloud API keys by following [this](https://registry.terraform.io/providers/confluentinc/confluent/latest/docs/guides/sample-project#summary) guide.
    > **Note:** This is different than Kafka cluster API keys.
 
-#### MongoDB Atlas
+#### Elastic Cloud
 
-1. Sign up for a free MongoDB Atlas account [here](https://www.mongodb.com/).
+1. Sign up for a free Elastic account [here](https://www.elastic.co/cloud).
 
-1. Create an API key pair so Terraform can create resources in the Atlas cluster. Follow the instructions [here](https://registry.terraform.io/providers/mongodb/mongodbatlas/latest/docs#configure-atlas-programmatic-access).
+2. Create an API key pair so Terraform can create resources in the Elastic cluster. Follow the instructions [here](https://www.elastic.co/guide/en/cloud-enterprise/current/ece-password-reset-elastic.html).
 
 # Setup
 
@@ -83,7 +83,7 @@ You need a working account for Confluent Cloud. Sign-up with Confluent Cloud is 
 1. Create an `.accounts` file by running the following command.
 
    ```bash
-   echo "CONFLUENT_CLOUD_EMAIL=add_your_email\nCONFLUENT_CLOUD_PASSWORD=add_your_password\nexport TF_VAR_confluent_cloud_api_key=\"add_your_api_key\"\nexport TF_VAR_confluent_cloud_api_secret=\"add_your_api_secret\"\nexport TF_VAR_mongodbatlas_public_key=\"add_your_public_key\"\nexport TF_VAR_mongodbatlas_private_key=\"add_your_private_key\"\nexport TF_VAR_mongodbatlas_org_id=\"add_your_org_id\"" > .accounts
+   echo "CONFLUENT_CLOUD_EMAIL=add_your_email\nCONFLUENT_CLOUD_PASSWORD=add_your_password\nexport TF_VAR_confluent_cloud_api_key=\"add_your_api_key\"\nexport TF_VAR_confluent_cloud_api_secret=\"add_your_api_secret\"" > .accounts
 
    ```
 
@@ -96,9 +96,6 @@ You need a working account for Confluent Cloud. Sign-up with Confluent Cloud is 
    CONFLUENT_CLOUD_PASSWORD=<replace>
    export TF_VAR_confluent_cloud_api_key="<replace>"
    export TF_VAR_confluent_cloud_api_secret="<replace>"
-   export TF_VAR_mongodbatlas_public_key="<replace>"
-   export TF_VAR_mongodbatlas_private_key="<replace>"
-   export TF_VAR_mongodbatlas_org_id="<replace>"
    ```
 
 1. Navigate to the home directory of the project and run `create_env.sh` script. This bash script copies the content of `.accounts` file into a new file called `.env` and append additional variables to it.
@@ -149,7 +146,8 @@ pip3 install gcc
 pip3 install confluent-kafka
 pip3 install langchain
 pip3 install fastavro
-pip3 install pymongo
+pip3 install elasticsearch
+pip3 install langchain_elasticsearch
 pip3 install flask
 pip3 install openai
 pip3 install pyopenssl
