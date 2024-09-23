@@ -12,6 +12,7 @@
 import socketio
 import pymongo
 import confluent_kafka
+from langchain_elasticsearch import ElasticsearchStore
 from confluent_kafka import DeserializingConsumer
 from langchain.chains.conversation.memory import ConversationBufferMemory
 from confluent_kafka import SerializingProducer
@@ -25,10 +26,6 @@ import ccloud_lib
 from langchain.prompts import PromptTemplate
 from langchain_openai import ChatOpenAI
 from langchain.chains import LLMChain
-from linkedin import scrape_linkedin_profile
-from linkedin_lookup_agent import lookup as linkedin_lookup_agent
-#from tools.linkedin import scrape_linkedin_profile
-#from tools.linkedin_lookup_agent import lookup as linkedin_lookup_agent
 # General
 import json
 import os
@@ -38,15 +35,6 @@ from langchain.vectorstores import MongoDBAtlasVectorSearch
 from langchain.chains import RetrievalQA
 from langchain.chat_models import ChatOpenAI
 OPENAIKEY = os.environ["OPENAI_API_KEY"]
-# mongo connection
-MONGO_URI = os.environ["MONGO_URI"]
-client = pymongo.MongoClient(MONGO_URI)
-db = client.genai
-docscollection = db.docs_embeddings_v1
-chatcollection = db.chatbotreq
-DB_NAME = "genai"
-COLLECTION_NAME = "doc_embeddings"
-ATLAS_VECTOR_SEARCH_INDEX_NAME = "vector_index"
 llm = ChatOpenAI(
     api_key=os.environ["OPENAI_API_KEY"],
     model="gpt-4o",
@@ -64,7 +52,7 @@ memory = ConversationBufferMemory(
             )
 # initialize socketio client
 # sio = socketio.Client(logger=True, engineio_logger=True)
-# sio.connect('http://localhost:5001')
+# sio.connect('http://ec2-3-87-26-1.compute-1.amazonaws.com:5001')
 args = ccloud_lib.parse_args()
 config_file = args.config_file
 chatbotreqtopic = args.chatbotreqtopic
@@ -82,18 +70,20 @@ chatbotres_producer_conf = ccloud_lib.pop_schema_registry_params_from_config(con
 chatbotresfinal_producer_conf = ccloud_lib.pop_schema_registry_params_from_config(confproducer)
 delivered_records = 0
 fundnames = ""
+embeddings = OpenAIEmbeddings(model="text-embedding-ada-002")
 # Mongo RAG
 def create_vector_search():
     """
     Creates a MongoDBAtlasVectorSearch object using the connection string, database, and collection names, along with the OpenAI embeddings and index configuration.
     """
-    vector_search = MongoDBAtlasVectorSearch.from_connection_string(
-        MONGO_URI,
-        f"{DB_NAME}.{COLLECTION_NAME}",
-        OpenAIEmbeddings(),
-        index_name=ATLAS_VECTOR_SEARCH_INDEX_NAME
+    elastic_vector_search = ElasticsearchStore(
+        es_cloud_id="<<ELASTIC_CLOUD>>",
+        index_name="doc_embeddings_elastic_v2",
+        embedding=embeddings,
+        es_user="elastic",
+        es_password="<<ELASTIC_PASSWORD>>",
     )
-    return vector_search
+    return elastic_vector_search
 message_count = 0
 waiting_count = 0
 # produce response
@@ -139,7 +129,7 @@ def publish_chatbotres(query,userid,reqid,context,session_id,answer):
         else:
            fundnames = "None"
         print(fundnames)
-        if not (fundnames=="None") and (len(fundnames.strip())>0):
+        if (fundnames.find("None")==-1) and (len(fundnames.strip())>0):
            print("reached this loop")
            print(fundnames)
            chatbotres_object.query = query
@@ -176,7 +166,7 @@ def perform_question_answering(query):
     )
     qa_retriever = vector_search.as_retriever(
         search_type="similarity",
-        search_kwargs={"k": 100}
+        search_kwargs={"k": 10}
     )
     template = """
     Use the following context (delimited by <ctx></ctx>) and the chat history (delimited by <hs></hs>) to answer the user question.If you don't know the answer, just say that you don't know, don't try to make up an answer. If the answer is valid, from the answer, extract stock symbols:
