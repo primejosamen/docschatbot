@@ -69,7 +69,9 @@ You need a working account for Confluent Cloud. Sign-up with Confluent Cloud is 
 
 1. Sign up for a free Elastic account [here](https://www.elastic.co/cloud).
 
-2. Create an API key pair so Terraform can create resources in the Elastic cluster. Follow the instructions [here](https://www.elastic.co/guide/en/cloud-enterprise/current/ece-password-reset-elastic.html).
+2. Reset password for `elastic` user in Elastic cloud cluster. Follow the instructions [here](https://www.elastic.co/guide/en/cloud-enterprise/current/ece-password-reset-elastic.html).
+3. Get the elastic cloud id. Follow the instruction [here](https://www.elastic.co/search-labs/tutorials/install-elasticsearch/elastic-cloud).
+   **Note:** Elastic cloud id and password are needed for python service to connect
 
 # Setup
 
@@ -162,7 +164,8 @@ Set the env-vars
 
 ```
 export OPENAI_API_KEY=<<OPEN_API_KEY>>
-export OPENAI_API_KEY=<<MONGO_URL>>
+export ELASTIC_CLOUD=<<ELASTIC_CLOUD_ID>>
+export ELASTIC_CLOUD_PASSWORD=<<ELASTIC_CLOUD_PASSWORD>>
 ```
 Create client.properties file with Confluent connection parameters (this is needed for python services to run)
 ```
